@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 
 // Ladda miljövariabler från .env
@@ -7,6 +8,9 @@ dotenv.config();
 
 // Hämta PORT från .env-filen eller använd 5001 som standard
 const PORT = process.env.PORT || 5001;
+
+// the absolute path to this directory
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // Skapa Express-app
 const app = express();
