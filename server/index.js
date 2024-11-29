@@ -3,30 +3,30 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 
-// Ladda miljövariabler från .env
+// Load environment variables from .env
 dotenv.config();
 
-// Hämta PORT från .env-filen eller använd 5001 som standard
+// Get the port from the environment variable
 const PORT = process.env.PORT || 5001;
 
-// the absolute path to this directory
+// The __dirname is the absolute path to this directory
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-// Skapa Express-app
+// Create the express app
 const app = express();
 
-// Sökvägen till dist-mappen
+// Path to the dist folder
 const distPath = path.join(__dirname, '..', 'dist');
 
-// Dela ut statiska filer från dist-mappen
+// Serve the dist folder
 app.use(express.static(distPath));
 
-// Fallback för alla andra rutter till index.html
+// Fallback route
 app.get('*', (req, res) => {
   res.sendFile(path.join(distPath, 'index.html'));
 });
 
-// Starta servern
+// Start the server
 app.listen(PORT, () => {
   console.log(`Servern kör på http://localhost:${PORT}`);
 });
